@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.parent{
+    width: 100vw;
+    padding-top: 15%;
+    height: 100vh;
+    background-color: #A0B5C6;
+}
+
+.signup-container{
+    width: 40%;
+    background-color: white;
+    margin: auto;
+    padding: 35px;
+    text-align: center;
+}
+
+.signup-input{
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #E62425;
+}
+
+.dropdown{
+    width: 30%;
+    padding: 10px;
+}
+
+.btn{
+    background-color: #E62425;
+    color: white;
+    width: 20%;
+    cursor: pointer;
+    margin: 10px;
+}
+
+@media (max-width : 1000px) {
+    .signup-container{
+        width: 70%;
+    }
+}

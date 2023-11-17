@@ -1,8 +1,13 @@
 import React from 'react'
+import Router from './router/router'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div className='parent'>
+
+      <Router/>
+      
+    </div>
   )
 }
 
