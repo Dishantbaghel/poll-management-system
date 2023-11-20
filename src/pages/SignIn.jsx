@@ -54,6 +54,7 @@ const SignIn = () => {
     dispatch(login(userCredentials));
   };
   return (
+    <div className="parent">
     <div className="signup-container">
       <form onSubmit={handleFormSubmit}>
         <h1>Sign In</h1>
@@ -79,6 +80,7 @@ const SignIn = () => {
         <button type="submit" className="btn" >Sign In</button>
         <Link to='/signup' className="btn" type="submit">Sign Up</Link>
       </form>
+    </div>
     </div>
   )
 }

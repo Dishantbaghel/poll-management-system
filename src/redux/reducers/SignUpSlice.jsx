@@ -43,9 +43,9 @@ const initialState = {
       dispatch(signupSlice.actions.startLoading());
       try {
         const response = await axiosInstance.post(
-          `add_user?username=${payload.username}&password=${payload.password}&role=${payload.role}`,
-          { payload }
+          `add_user?username=${payload.name}&password=${payload.password}&role=${payload.role}`
         );
+        console.log(response);
         dispatch(signupSlice.actions.loginSuccess(response.data));
       } catch (e) {
         dispatch(signupSlice.actions.hasError(e));
@@ -53,6 +53,5 @@ const initialState = {
     };
   }
   
-  export const { startLoading, hasError, loginSuccess, resetReducer } =
-    signupSlice.actions;
+  export const { startLoading, hasError, loginSuccess, resetReducer } = signupSlice.actions;
   export default signupSlice.reducer;

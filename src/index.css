@@ -6,9 +6,9 @@
 
 .parent{
     width: 100vw;
-    padding-top: 15%;
     height: 100vh;
     background-color: #A0B5C6;
+    padding-top: 100px;
 }
 
 .signup-container{
@@ -16,11 +16,10 @@
     background-color: white;
     margin: auto;
     padding: 35px;
-    text-align: center;
 }
 
 .signup-input{
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border: 2px solid #E62425;
 }
@@ -36,6 +35,24 @@
     width: 20%;
     cursor: pointer;
     margin: 10px;
+}
+
+.form-error{
+    color: red;
+}
+
+.home-parent{
+    width: 100vh;
+    height: auto;
+    background-color: lightblue;
+}
+
+.home-page-container{
+    width: 90vw;
+    margin: auto;
+    height: auto;
+    background-color: lightcoral;
+    text-align: center;
 }
 
 @media (max-width : 1000px) {
