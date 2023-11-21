@@ -20,7 +20,16 @@ const SignUp = () => {
 
   useEffect(() => {
     if (signupSlice.isSuccess && !signupSlice.data.message) {
-      alert("Successfully Signed Up");
+      toast.success('🦄 Wow so easy!', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
       navigate("/");
       dispatch(resetReducer());
     } else if (signupSlice.data.message) {
@@ -47,9 +56,9 @@ const SignUp = () => {
       validationSchema: signupSchema,
       onSubmit: (values) => {
         dispatch(signup(values));
-        // if (status) {
-        //   dispatch(resetReducer());
-        // }
+        if (status) {
+          dispatch(resetReducer());
+        }
       },
     });
 

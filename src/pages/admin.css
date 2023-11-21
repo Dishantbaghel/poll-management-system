@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.admin-parent{
+    width: 100vw;
+    height: auto;
+    background-color: lightblue;
+}
+
+.admin-page-container{
+    width: 90vw;
+    margin: auto;
+    height: auto;
+    background-color: lightcoral;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.poll-options{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-poll{
+    width: 40%;
+    background-color: red;
+    margin: auto;
+}
+
+.add-poll-input{
+    width: 100%;
+    
+}

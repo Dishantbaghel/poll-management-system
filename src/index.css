@@ -41,19 +41,7 @@
     color: red;
 }
 
-.home-parent{
-    width: 100vh;
-    height: auto;
-    background-color: lightblue;
-}
 
-.home-page-container{
-    width: 90vw;
-    margin: auto;
-    height: auto;
-    background-color: lightcoral;
-    text-align: center;
-}
 
 @media (max-width : 1000px) {
     .signup-container{

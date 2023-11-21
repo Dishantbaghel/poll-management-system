@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.home-parent{
+    width: 100vw;
+    height: auto;
+    background-color: lightblue;
+}
+
+.home-page-container{
+    width: 90vw;
+    margin: auto;
+    height: auto;
+    background-color: lightcoral;
+}
+
+/* .poll-options{
+    display: flex;
+    background-color: red;
+} */
+
