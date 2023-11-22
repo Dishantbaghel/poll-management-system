@@ -24,15 +24,10 @@
     border: 2px solid #E62425;
 }
 
-.dropdown{
-    width: 30%;
-    padding: 10px;
-}
-
 .btn{
     background-color: #E62425;
     color: white;
-    width: 20%;
+    
     cursor: pointer;
     margin: 10px;
 }

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchedAllPolls } from "../redux/reducers/AdminSlice";
-import "./admin.css";
 import { dispatch } from "../redux/Store";
-import { useNavigate } from "react-router-dom";
 import { AddPoll } from "../redux/reducers/AddPollSlice";
+import "./admin.css";
 
 const Admin = () => {
   const listItems = useSelector((state) => state.AdminSlice.data);
-  const loading = useSelector((state) => state.AdminSlice.isLoading);
-  const status = useSelector((state) => state.AdminSlice.isSuccess);
-
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
   const [addPoll, setAddPoll] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newOptions, setNewOptions] = useState([{ option: "" }]);
@@ -39,6 +34,7 @@ const Admin = () => {
       );
       dispatch(AddPoll(newTitle, newOptionsList));
     }
+    setAddPoll(false)
   };
 
   const handleChange = (event, index) => {
@@ -53,11 +49,6 @@ const Admin = () => {
       setNewTitle(event.target.value);
     }
   };
-
-  const submitData =()=>{
-    console.log(newOptions);
-    setAddPoll(false)
-  }
 
   return (
     <div className="admin-parent">
@@ -87,7 +78,7 @@ const Admin = () => {
                 </div>
               ))}
               <button onClick={handleClick}>Add Option</button>
-              <button onClick={()=>submitData()}>Submit</button>
+              <button type="submit">Submit</button>
               <button onClick={() => setAddPoll(false)}>Cancel</button>
             </form>
           </div>

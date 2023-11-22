@@ -7,6 +7,8 @@ import { useFormik } from "formik";
 import { signupSchema } from "../schemas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TextField } from '@mui/material'
+import './signUp.css'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -31,8 +33,8 @@ const SignUp = () => {
         theme: "colored",
         });
       navigate("/");
-      dispatch(resetReducer());
-    } else if (signupSlice.data.message) {
+      dispatch(resetReducer());}  
+    if (signupSlice.data.message) {
       toast.error("User allready exist.", {
         position: "top-center",
         autoClose: 2000,
@@ -51,10 +53,11 @@ const SignUp = () => {
       initialValues: {
         name: "",
         password: "",
-        role: "guest",
+        role: "admin",
       },
       validationSchema: signupSchema,
       onSubmit: (values) => {
+        console.log(values);
         dispatch(signup(values));
         if (status) {
           dispatch(resetReducer());
@@ -63,16 +66,16 @@ const SignUp = () => {
     });
 
   return (
-    <div className="parent">
-    <div className="signup-container">
+    <div className="signUp-container">
+    <div className="signUp-box1">
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h1>SIGN UP</h1>
         <br />
         <div>
           <label htmlFor="name">Name: </label>
           <br />
-          <input
-            className="signup-input"
+          <TextField
+          className="signUp-input"
             autoComplete="off"
             name="name"
             id="name"
@@ -81,16 +84,16 @@ const SignUp = () => {
             value={values.name}
             onChange={handleChange}
             onBlur={handleBlur}
-          />
+            />
           {errors.name && touched.name ? (
-            <p className="form-error">{errors.name}</p>
+            <div className="form-error">{errors.name}</div>
           ) : null}
         </div>
         <br />
         <label htmlFor="password">Password: </label>
         <br />
-        <input
-          className="signup-input"
+        <TextField 
+          className="signUp-input"
           name="password"
           type="password"
           placeholder="Enter Password here..."
@@ -99,16 +102,17 @@ const SignUp = () => {
           onBlur={handleBlur}
         />
         {errors.password && touched.name ? (
-          <p className="form-error">{errors.password}</p>
+          <div className="form-error">{errors.password}</div>
         ) : null}
         <br />
         <br />
-        <label htmlFor="role">Choose a role: </label>
 
+        <label htmlFor="role">Choose a role: </label>
         <select
-          className="dropdown"
+          className="signUp-dropdown"
           id="role"
           name="role"
+          value={values.role}
           onChange={handleChange}
           onBlur={handleBlur}
         >
