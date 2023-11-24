@@ -8,6 +8,7 @@ import DeletePollSlice from "./DeletePollSlice";
 import DeleteOptionSlice from "./DeleteOptionSlice";
 import AddOptionSlice from "./AddOptionSlice";
 import EditPollSlice from "./EditPollSlice";
+import VoteSlice from "./VoteSlice";
 
 const rootReducer = combineReducers({
     SignUpSlice : SignUpSlice,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     DeletePollSlice : DeletePollSlice,
     DeleteOptionSlice : DeleteOptionSlice,
     OptionsSlice : EditPollSlice,
+    VoteSlice : VoteSlice,
 })
 
 export default rootReducer

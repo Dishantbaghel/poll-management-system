@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+.parent{
+    width: 100vw;
+    height: 100vh;
+    background-color: #6D9AC4;
+}
+
 .all-inputfield{
  width: 100%;
 }
