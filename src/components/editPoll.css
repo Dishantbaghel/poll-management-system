@@ -4,14 +4,14 @@
     box-sizing: border-box;
 }
 
-.signUp-container{
+.editPoll-container{
     width: 100vw;
     height: 100vh;
     background-color: #6D9AC4;
     padding-top: 100px;
 }
 
-.signUp-box1{
+.editPoll-box1{
     width: 30%;
     margin: auto;
     background-color: white;
@@ -19,17 +19,14 @@
     padding: 15px;
 }
 
-.signUp-input{
-    width: 100%;
-}
-
-.signUp-dropdown{
+.editPoll-input{
     width: 100%;
     padding: 10px;
+    font-size: 20px;
 }
 
 @media (max-width : 1000px) {
-    .signup-box1{
+    .editPoll-box1{
         width: 60%;
     }
 }

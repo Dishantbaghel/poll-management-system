@@ -14,11 +14,10 @@ const SignUp = () => {
   const navigate = useNavigate();
   const signupSlice = useSelector((state) => state.SignUpSlice);
   const status = useSelector((state) => state.SignUpSlice.isLoading);
-  // const error = useSelector((state) => state.SignUpSlice.isError);
 
   useEffect(() => {
     dispatch(signup());
-  }, []);
+  }, [status]);
 
   useEffect(() => {
     if (signupSlice.isSuccess && !signupSlice.data.message) {

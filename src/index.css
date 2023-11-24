@@ -4,30 +4,14 @@
     box-sizing: border-box;
 }
 
-.parent{
-    width: 100vw;
-    height: 100vh;
-    background-color: #A0B5C6;
-    padding-top: 100px;
+.all-inputfield{
+ width: 100%;
 }
 
-.signup-container{
-    width: 40%;
-    background-color: white;
-    margin: auto;
-    padding: 35px;
-}
-
-.signup-input{
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #E62425;
-}
 
 .btn{
     background-color: #E62425;
     color: white;
-    
     cursor: pointer;
     margin: 10px;
 }
@@ -36,10 +20,18 @@
     color: red;
 }
 
+.icon-btns{
+    color: #E62425;
+    cursor: pointer;
+}
 
+.icon-btns:hover{
+    color: blue;
+}
 
-@media (max-width : 1000px) {
-    .signup-container{
-        width: 70%;
-    }
+.poll-options{
+    border: 1px solid lightgray;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
 }

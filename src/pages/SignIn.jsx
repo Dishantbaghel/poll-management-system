@@ -7,11 +7,12 @@ import { jwtDecode } from 'jwt-decode';
 import './signIn.css'
 import { TextField } from "@mui/material";
 import { resetReducer } from "../redux/reducers/SignUpSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
   const [username, setUserName] = useState('');
   const [password, setUserPass] = useState('');
-  const [validationError, setValidationError] = useState(false);
 
   const navigate = useNavigate();
   const loginSlice = useSelector((state) => state.loginSlice);
@@ -31,9 +32,17 @@ const SignIn = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (username.trim() === '' || password.trim() === '') {
-      setValidationError(true);
+      toast.error('🦄 InputField cannot be empty!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     } else {
-      setValidationError(false);
       const userCredentials = {
         username,
         password
@@ -56,7 +65,6 @@ const SignIn = () => {
             variant="outlined"
             onChange={(e) => setUserName(e.target.value)}
           />
-          {validationError && <p>Please enter a name</p>}
           <br/><br/>
           <label>Password: </label><br />
           <TextField
@@ -66,12 +74,23 @@ const SignIn = () => {
             variant="outlined"
             onChange={(e) => setUserPass(e.target.value)}
           />
-          {validationError && <p>Please enter a password</p>}
           <br/><br/>
           <button variant='contained' type="submit" className="btn">Sign In</button>
           <Link to='/signup' className="btn" type="submit">Sign Up</Link>
         </form>
       </div>
+      <ToastContainer
+position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   );
 };
