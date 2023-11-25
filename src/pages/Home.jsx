@@ -5,13 +5,14 @@ import { dispatch } from "../redux/Store";
 import { useNavigate } from "react-router-dom";
 import { vote } from "../redux/reducers/VoteSlice";
 import { Pagination } from "@mui/material";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const listItems = useSelector((state) => state.HomeSlice.data);
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [disabledOptions, setDisabledOptions] = useState({});
 
   useEffect(() => {
     dispatch(fetchedAllPolls());
@@ -27,7 +28,8 @@ const Home = () => {
       },
     };
     dispatch(vote(id, opt, header));
-    toast.success('🦄 Thanks for voting!', {
+    setDisabledOptions({ ...disabledOptions, [id]: true });
+    toast.success("🦄 Thanks for voting!", {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -36,7 +38,7 @@ const Home = () => {
       draggable: true,
       progress: undefined,
       theme: "colored",
-      });
+    });
   };
 
   const handlePage = (selectedPage) => setPage(selectedPage);
@@ -87,7 +89,7 @@ const Home = () => {
                                   handleVote(dataList._id, option.option)
                                 }
                                 name={dataList._id}
-                              />
+                                disabled={disabledOptions[dataList._id]}                              />
                               {option.option}
                             </div>
                           </div>
@@ -112,17 +114,17 @@ const Home = () => {
           }}
         />
         <ToastContainer
-position="top-center"
-autoClose={1}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-/>
+          position="top-center"
+          autoClose={1}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </div>
   );

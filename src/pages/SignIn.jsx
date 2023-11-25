@@ -4,11 +4,11 @@ import { dispatch } from "../redux/Store";
 import { login } from "../redux/reducers/LoginSlice";
 import { useSelector } from "react-redux";
 import { jwtDecode } from 'jwt-decode';
-import './signIn.css'
-import { TextField } from "@mui/material";
+import { Backdrop, CircularProgress, TextField } from "@mui/material";
 import { resetReducer } from "../redux/reducers/SignUpSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './signIn.css'
 
 const SignIn = () => {
   const [username, setUserName] = useState('');
@@ -16,6 +16,11 @@ const SignIn = () => {
 
   const navigate = useNavigate();
   const loginSlice = useSelector((state) => state.loginSlice);
+  const status = useSelector((state) => state.loginSlice.isLoading);
+
+  useEffect(()=>{
+    dispatch(login());
+  },[])
 
   useEffect(() => {
     if (loginSlice.isSuccess && loginSlice.data.token) {
@@ -53,6 +58,12 @@ const SignIn = () => {
 
   return (
     <div className="signIn-container">
+    {status && <Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={open}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>}
       <div className="signIn-box1">
         <form onSubmit={handleFormSubmit}>
           <h1>SIGN IN</h1>

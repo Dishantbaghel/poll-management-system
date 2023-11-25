@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../utilities/axios";
-import { dispatch } from "../Store";
 
 const initialState = {
     isLoading: false,
@@ -39,13 +38,13 @@ const initialState = {
   });
 
   export function signup(payload) {
-    return async () => {
+    console.log(payload);
+    return async (dispatch) => {
       dispatch(signupSlice.actions.startLoading());
       try {
         const response = await axiosInstance.post(
           `add_user?username=${payload.name}&password=${payload.password}&role=${payload.role}`
         );
-        console.log(response);
         dispatch(signupSlice.actions.loginSuccess(response.data));
       } catch (e) {
         dispatch(signupSlice.actions.hasError(e));

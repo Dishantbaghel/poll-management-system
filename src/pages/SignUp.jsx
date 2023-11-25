@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import { signupSchema } from "../schemas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { TextField } from '@mui/material'
+import { Backdrop, CircularProgress, TextField } from '@mui/material'
 import './signUp.css'
 
 const SignUp = () => {
@@ -17,20 +17,10 @@ const SignUp = () => {
 
   useEffect(() => {
     dispatch(signup());
-  }, [status]);
+    }, []);
 
   useEffect(() => {
     if (signupSlice.isSuccess && !signupSlice.data.message) {
-      toast.success('🦄 Wow so easy!', {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
       navigate("/");
       dispatch(resetReducer());}  
     if (signupSlice.data.message) {
@@ -56,7 +46,6 @@ const SignUp = () => {
       },
       validationSchema: signupSchema,
       onSubmit: (values) => {
-        console.log(values);
         dispatch(signup(values));
         if (status) {
           dispatch(resetReducer());
@@ -66,6 +55,13 @@ const SignUp = () => {
 
   return (
     <div className="signUp-container">
+    {status && 
+      <Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={open}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>}
     <div className="signUp-box1">
       <form onSubmit={handleSubmit}>
         <h1>SIGN UP</h1>
