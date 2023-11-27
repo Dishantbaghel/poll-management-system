@@ -86,8 +86,9 @@ const SignIn = () => {
             onChange={(e) => setUserPass(e.target.value)}
           />
           <br/><br/>
-          <button variant='contained' type="submit" className="btn">Sign In</button>
-          <Link to='/signup' className="btn" type="submit">Sign Up</Link>
+          <div style={{textAlign:'center'}}>
+          <div><button variant='contained' type="submit" className="btn">Sign In</button></div>
+          <Link to='/signup'  type="submit">Don't have account? Register now</Link></div>
         </form>
       </div>
       <ToastContainer

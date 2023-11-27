@@ -117,12 +117,15 @@ const SignUp = () => {
         <br />
         <br />
         <br />
+        <div style={{textAlign:'center'}}>
+        <div>
         <button className="btn" type="submit">
           Sign Up
-        </button>
-        <Link to="/signin" className="btn" type="submit">
-          Sign In
+        </button></div>
+        <Link to="/signin" type="submit"> 
+          Already have account? Login
         </Link>
+        </div>
       </form>
       <ToastContainer
         position="top-center"

@@ -4,19 +4,45 @@ import { fetchedAllPolls } from "../redux/reducers/HomeSlice";
 import { dispatch } from "../redux/Store";
 import { useNavigate } from "react-router-dom";
 import { vote } from "../redux/reducers/VoteSlice";
-import { Pagination } from "@mui/material";
+import { Backdrop, CircularProgress, TablePagination } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPageOption, setRowsPerPageOption] = useState([5, 10, 15]);
+  const adminLoading = useSelector((state) => state.HomeSlice.isLoading);
   const listItems = useSelector((state) => state.HomeSlice.data);
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
   const [disabledOptions, setDisabledOptions] = useState({});
+
+  const row = () => {
+    if (localStorage.getItem("rowpage")) {
+      return JSON.parse(localStorage.getItem("rowpage"));
+    }
+    return 5;
+  };
+  const [rowPerPage, setRowPerPage] = useState(row());
 
   useEffect(() => {
     dispatch(fetchedAllPolls());
-  }, [listItems.isSuccess]);
+    const data = JSON.parse(localStorage.getItem("page"));
+    if (data) {
+      setPage(parseInt(data));
+    }
+
+    const disabledOptionsFromStorage = {};
+    listItems.forEach((dataList) => {
+      const storedVote = localStorage.getItem(`vote_${dataList._id}`);
+      disabledOptionsFromStorage[dataList._id] = storedVote !== null;
+    });
+    setDisabledOptions(disabledOptionsFromStorage);
+  }, [listItems.isSuccess, dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("page", page);
+    localStorage.setItem("rowpage", rowPerPage);
+  }, [page, rowPerPage]);
 
   const handleLogOut = () => navigate("/");
 
@@ -27,6 +53,10 @@ const Home = () => {
         access_token: token,
       },
     };
+    localStorage.setItem(`vote_${id}`, id);
+    const updatedDisabledOptions = { ...disabledOptions, [id]: true };
+  localStorage.setItem("disabledOptions", JSON.stringify(updatedDisabledOptions));
+  localStorage.getItem('disabledOptions')
     dispatch(vote(id, opt, header));
     setDisabledOptions({ ...disabledOptions, [id]: true });
     toast.success("🦄 Thanks for voting!", {
@@ -41,7 +71,12 @@ const Home = () => {
     });
   };
 
-  const handlePage = (selectedPage) => setPage(selectedPage);
+  const handleChangePage = (event, updatePage) => setPage(updatePage);
+
+  const handleRowPerPage = (event) => {
+    setRowPerPage(event.target.value);
+    setPage(0);
+  };
 
   return (
     <div>
@@ -52,67 +87,77 @@ const Home = () => {
             Log Out
           </button>
         </div>
+        {adminLoading && (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={adminLoading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
         <div className="container" style={{ wordBreak: "break-word" }}>
           <div className="row">
             <div className="col">
-              {listItems.slice(page * 5 - 5, page * 5).map((dataList) => (
-                <div className="card mt-3" key={dataList._id}>
-                  <div
-                    className="card-header "
-                    style={{ backgroundColor: "lightgray" }}
-                  >
-                    <h5
-                      className="card-title"
-                      style={{ wordWrap: "break-word" }}
+              {listItems
+                .slice(page * rowPerPage, page * rowPerPage + rowPerPage)
+                .map((dataList) => (
+                  <div className="card mt-3" key={dataList._id}>
+                    <div
+                      className="card-header "
+                      style={{ backgroundColor: "lightgray" }}
                     >
-                      {dataList.title}
-                    </h5>
-                  </div>
-                  <div className="card-body">
-                    {dataList.options.map((option) => (
-                      <div className="form-check" key={option.option}>
-                        <div className="d-flex justify-content-between">
-                          <div
-                            style={{
-                              wordWrap: "break-word",
-                              border: "1px solid lightgray",
-                              margin: " 5px",
-                              padding: "5px",
-                              borderRadius: "10px",
-                              width: "100%",
-                            }}
-                          >
-                            <div className="single-option">
-                              <input
-                                type="radio"
-                                onClick={() =>
-                                  handleVote(dataList._id, option.option)
-                                }
-                                name={dataList._id}
-                                disabled={disabledOptions[dataList._id]}                              />
-                              {option.option}
+                      <h5
+                        className="card-title"
+                        style={{ wordWrap: "break-word" }}
+                      >
+                        {dataList.title}
+                      </h5>
+                    </div>
+                    <div className="card-body">
+                      {dataList.options.map((option) => (
+                        <div className="form-check" key={option.option}>
+                          <div className="d-flex justify-content-between">
+                            <div
+                              className="poll-options"
+                              style={{
+                                wordWrap: "break-word",
+                              }}
+                            >
+                              <div className="single-option">
+                                <input
+                                  type="radio"
+                                  onClick={() => handleVote(dataList._id, option.option)}
+                                  name={dataList._id}
+                                  disabled={localStorage.getItem(`vote_${dataList._id}`)}
+                                />
+                                {option.option}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
-        <Pagination
-          count={Math.ceil(listItems.length / 5)}
-          color="primary"
-          page={page}
-          onChange={(event, value) => handlePage(value)}
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
-            marginTop: "10px",
           }}
-        />
+        >
+          <TablePagination
+            component="div"
+            rowsPerPageOptions={rowsPerPageOption}
+            count={listItems.length}
+            page={!listItems.length || listItems.length <= 0 ? 0 : page}
+            rowsPerPage={rowPerPage}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleRowPerPage}
+          />
+        </div>
         <ToastContainer
           position="top-center"
           autoClose={1}
