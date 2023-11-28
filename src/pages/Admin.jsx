@@ -32,7 +32,6 @@ const Admin = () => {
   }, [page, rowPerPage]);
 
   useEffect(() => {
-    dispatch(fetchedAllPolls());
     const data = JSON.parse(localStorage.getItem("page"));
     if (data) {
       setPage(parseInt(data));
@@ -75,6 +74,12 @@ const Admin = () => {
     setPage(0);
   };
 
+  const handleLogout=()=>{
+    localStorage.removeItem('token');
+    // localStorage.clear();
+    console.log('logout');
+  }
+
   return (
     <div className="parent">
       <div>
@@ -84,7 +89,7 @@ const Admin = () => {
             <button className="btn">Add Poll</button>
           </NavLink>
           <NavLink to={"/signIn"}>
-            <button className="btn">Log Out</button>
+            <button onClick={handleLogout} className="btn">Log Out</button>
           </NavLink>
         </div>
         {open && (

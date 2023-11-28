@@ -43,7 +43,7 @@ export function login(payload) {
     try {
       const response = await axiosInstance.post(
         `login?username=${payload.username}&password=${payload.password}`,
-        { payload }
+        { username: payload.username, password: payload.password }
       );
       dispatch(loginSlice.actions.loginSuccess(response.data));
     } catch (e) {

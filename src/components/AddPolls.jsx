@@ -51,7 +51,6 @@ const AddPolls = () => {
     setNewOptions(updatedOptions);
   };
   
-
   const updatedInput = (event) => {
     setTitle(event.target.value.trim());
   };
@@ -66,6 +65,7 @@ const AddPolls = () => {
     <div className="addPolls-container">
       <div className="addPolls-box1">
         <form autoComplete="off" onSubmit={handleSubmit}>
+        
           <label>Title:</label>
           <TextField
             type="text"
