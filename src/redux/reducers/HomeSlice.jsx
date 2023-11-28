@@ -40,7 +40,7 @@ export function fetchedAllPolls(){
     return async () =>{
         dispatch(homeSlice.actions.startLoading());
         try{
-            const response = await axiosInstance.get('list_polls');
+            const response = await axiosInstance.get('list_polls'); 
             dispatch(homeSlice.actions.loginSucess(response.data));
         }catch(e){
             dispatch(homeSlice.actions.hasError(e));

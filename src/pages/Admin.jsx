@@ -13,7 +13,6 @@ import "./admin.css";
 
 const Admin = () => {
   const listItems = useSelector((state) => state.AdminSlice.data);
-  // const [page, setPage] = useState(0);
   const [page, setPage] = useState(() => {
     const storedPage = JSON.parse(localStorage.getItem("page"));
     return storedPage || 0;
@@ -45,12 +44,8 @@ const Admin = () => {
     localStorage.setItem("rowpage", rowPerPage);
   }, [page, rowPerPage]);
 
-  const deleteSingleOption = useSelector(
-    (state) => state.DeleteOptionSlice.isLoading
-  );
-  const deleteSinglePoll = useSelector(
-    (state) => state.DeletePollSlice.isLoading
-  );
+  const deleteSingleOption = useSelector((state) => state.DeleteOptionSlice.isLoading);
+  const deleteSinglePoll = useSelector((state) => state.DeletePollSlice.isLoading);
 
   const adminLoading = useSelector((state) => state.AdminSlice.isLoading);
   const add = useSelector((state) => state.AddPollSlice.isLoading);
