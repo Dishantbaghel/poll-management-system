@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./signIn.css";
 
 const SignIn = () => {
   const [username, setUserName] = useState("");
@@ -56,7 +55,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signIn-container">
+    <div className="parent">
       {status && (
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -65,14 +64,14 @@ const SignIn = () => {
           <CircularProgress color="inherit" />
         </Backdrop>
       )}
-      <div className="signIn-box1">
+      <div className="child">
         <form onSubmit={handleFormSubmit}>
           <h1>SIGN IN</h1>
           <br />
           <label>Name: </label>
           <br />
           <TextField
-            className="signIn-input"
+            className="all-inputfield"
             type="text"
             value={username}
             variant="outlined"
@@ -83,7 +82,7 @@ const SignIn = () => {
           <label>Password: </label>
           <br />
           <TextField
-            className="signIn-input"
+            className="all-inputfield"
             type="password"
             value={password}
             variant="outlined"

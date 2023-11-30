@@ -5,7 +5,6 @@ import { updateTitle } from "../redux/reducers/EditPollSlice";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./editPoll.css";
 
 const EditPoll = () => {
   const [inputTitle, setInputTitle] = useState("");
@@ -47,14 +46,14 @@ const EditPoll = () => {
   };
 
   return (
-    <div className="editPoll-container">
-      <div className="editPoll-box1">
+    <div className="parent">
+      <div className="child">
         <h1>EDIT POLL</h1>
         <form onSubmit={handleFormSubmit}>
           <label>Update Title: </label>
           <br />
           <TextField
-            className="editPoll-input"
+            className="all-inputfield"
             type="text"
             value={inputTitle}
             variant="outlined"

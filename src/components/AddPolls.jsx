@@ -5,7 +5,6 @@ import { dispatch } from "../redux/Store";
 import { TextField } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./addPolls.css";
 
 const AddPolls = () => {
   const [title, setTitle] = useState("");
@@ -62,14 +61,14 @@ const AddPolls = () => {
   };
 
   return (
-    <div className="addPolls-container">
-      <div className="addPolls-box1">
+    <div className="parent">
+      <div className="child">
         <form autoComplete="off" onSubmit={handleSubmit}>
         
           <label>Title:</label>
           <TextField
             type="text"
-            className="addPolls-input"
+            className="all-inputfield"
             value={title}
             onChange={updatedInput}
           />
@@ -78,7 +77,7 @@ const AddPolls = () => {
             <div key={index} className="optionsContainer">
               <p className="addText">option {index + 1}:</p>
               <TextField
-                className="addPolls-input"
+                className="all-inputfield"
                 name="option"
                 type="text"
                 value={option.option}

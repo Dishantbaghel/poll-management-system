@@ -83,9 +83,9 @@ const Home = () => {
 
   return (
     <div>
-      <div className="parent">
+      <div className="admin-parent">
         <div className="header">
-          <h1 style={{ color: "white" }}>welcome to Home page</h1>
+          <h1>welcome to Home page</h1>
           <button className="btn" onClick={handleLogOut}>
             Log Out
           </button>
@@ -126,7 +126,7 @@ const Home = () => {
                                 wordWrap: "break-word",
                               }}
                             >
-                              <div className="single-option">
+                              <div>
                                 <input
                                   type="radio"
                                   onClick={() => handleVote(dataList._id, option.option)}

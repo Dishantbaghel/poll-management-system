@@ -34,7 +34,7 @@ const AddOptions = () => {
     } else {
       toast.error("🦄 InputField cannot be empty!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -54,14 +54,14 @@ const AddOptions = () => {
  
 
   return (
-    <div className="editPoll-container">
-      <div className="editPoll-box1">
+    <div className="parent">
+      <div className="child">
         <h1>ADD OPTION</h1>
         <form onSubmit={handleFormSubmit}>
           <label>Option: </label>
           <br />
           <TextField
-            className="editPoll-input"
+            className="all-inputfield"
             type="text"
             variant="outlined"
             onChange={handleTitle}

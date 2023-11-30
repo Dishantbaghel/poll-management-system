@@ -4,18 +4,19 @@
     box-sizing: border-box;
 }
 
-/* .admin-page-container{
+.admin-parent{
     width: 100vw;
     height: 100vh;
     background-color: #6D9AC4;
-} */
+}
 
 .header{
     text-align: center;
+    color: white;
 }
 
 .container{
-    height: 70vh;
+    height: 73vh;
     overflow-y: auto;
 }
 
@@ -28,17 +29,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
-
-.add-poll{
-    width: 40%;
-    background-color: red;
-    margin: auto;
-}
-
-.add-poll-input{
-    width: 100%;
-    
 }
 
 .admin-btns{

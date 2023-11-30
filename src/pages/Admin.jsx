@@ -89,7 +89,7 @@ const Admin = () => {
   const handleLogout = () => localStorage.clear();
 
   return (
-    <div className="parent">
+    <div className="admin-parent">
       <div>
         <div className="header">
           <h1 style={{ color: "white" }}>welcome to Admin page</h1>

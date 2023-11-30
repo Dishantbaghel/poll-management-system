@@ -8,7 +8,6 @@ import { signupSchema } from "../schemas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Backdrop, CircularProgress, TextField } from '@mui/material'
-import './signUp.css'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -54,7 +53,7 @@ const SignUp = () => {
     });
 
   return (
-    <div className="signUp-container">
+    <div className="parent">
     {status && 
       <Backdrop
   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -62,7 +61,7 @@ const SignUp = () => {
 >
   <CircularProgress color="inherit" />
 </Backdrop>}
-    <div className="signUp-box1">
+    <div className="child">
       <form onSubmit={handleSubmit}>
         <h1>SIGN UP</h1>
         <br />
@@ -70,7 +69,7 @@ const SignUp = () => {
           <label htmlFor="name">Name: </label>
           <br />
           <TextField
-          className="signUp-input"
+          className="all-inputfield"
             autoComplete="off"
             name="name"
             id="name"
@@ -88,7 +87,7 @@ const SignUp = () => {
         <label htmlFor="password">Password: </label>
         <br />
         <TextField 
-          className="signUp-input"
+          className="all-inputfield"
           name="password"
           type="password"
           placeholder="Enter Password here..."
