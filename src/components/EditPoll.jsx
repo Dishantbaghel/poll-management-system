@@ -22,7 +22,7 @@ const EditPoll = () => {
     e.preventDefault();
     if (inputTitle.trim() !== "") {
       dispatch(updateTitle(inputTitle, edittitleId));
-      navigate("/Admin");
+      navigate("/private/Admin");
     } else {
       toast.error("🦄 InputField cannot be empty!", {
         position: "top-center",
@@ -43,7 +43,7 @@ const EditPoll = () => {
   };
 
   const handleHome = () => {
-    navigate("/Admin");
+    navigate("/private/Admin");
   };
 
   return (

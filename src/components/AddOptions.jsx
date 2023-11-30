@@ -19,7 +19,7 @@ const AddOptions = () => {
     const isDuplicate = getOptions.data.some((poll) => poll.options.some((option) => option.option === inputOption.trim()));
     if (inputOption.trim() !== "" && !isDuplicate) {
       dispatch(optionsAdd(inputOption, optionId));
-      navigate("/Admin");
+      navigate("/private/Admin");
     } else if (isDuplicate) {
       toast.error("🦄 Duplicate option! Please enter a unique option.", {
         position: "top-center",
@@ -50,7 +50,7 @@ const AddOptions = () => {
     setInputOption(e.target.value);
   };
 
-  const handleHome = () => navigate("/Admin");
+  const handleHome = () => navigate("/private/Admin");
  
 
   return (

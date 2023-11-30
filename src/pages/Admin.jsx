@@ -12,6 +12,9 @@ import { Backdrop, CircularProgress, TablePagination } from "@mui/material";
 import "./admin.css";
 
 const Admin = () => {
+  const [deletePollTitle, setDeletePollTitle] = useState(null); 
+  const [deletePollOption, setDeletePollOption] = useState(null);
+
   const listItems = useSelector((state) => state.AdminSlice.data);
   const [page, setPage] = useState(() => {
     const storedPage = JSON.parse(localStorage.getItem("page"));
@@ -43,15 +46,18 @@ const Admin = () => {
     localStorage.setItem("rowpage", rowPerPage);
   }, [page, rowPerPage]);
 
-  const deleteSingleOption = useSelector((state) => state.DeleteOptionSlice.isLoading);
-  const deleteSinglePoll = useSelector((state) => state.DeletePollSlice.isLoading);
+  const deleteSingleOption = useSelector(
+    (state) => state.DeleteOptionSlice.isLoading
+  );
+  const deleteSinglePoll = useSelector(
+    (state) => state.DeletePollSlice.isLoading
+  );
 
-  const adminLoading = useSelector((state) => state.AdminSlice.isLoading);
   const add = useSelector((state) => state.AddPollSlice.isLoading);
-  const deleteOpt = useSelector((state) => state.AddOptionSlice.isLoading);
+  const addOption = useSelector((state) => state.AddOptionSlice.isLoading);
   const editTitle = useSelector((state) => state.OptionsSlice.isLoading);
 
-  const isLoading = adminLoading || deleteSingleOption || deleteSinglePoll || add || deleteOpt || editTitle;
+  const isLoading = add || addOption || editTitle;
 
   const [open, setOpen] = useState(isLoading);
 
@@ -61,24 +67,26 @@ const Admin = () => {
 
   useEffect(() => {
     dispatch(fetchedAllPolls());
-  }, [deleteSingleOption, deleteSinglePoll, add, deleteOpt, editTitle]);
+  }, [deleteSingleOption, deleteSinglePoll, add, addOption, editTitle]);
 
-  const handleDelete = (id) => dispatch(deletePoll(id));
+  const handleDelete = (id) => {
+    setDeletePollTitle(id);
+    dispatch(deletePoll(id));
+  };
 
-  const handleDeleteOption = (id, opt) => dispatch(deleteOption(id, opt));
+  const handleDeleteOption = (id, opt) => {
+    setDeletePollOption(opt);
+    dispatch(deleteOption(id, opt));
+  };
 
-  const handleChangePage =(event,updatePage) => setPage(updatePage);
+  const handleChangePage = (event, updatePage) => setPage(updatePage);
 
   const handleRowPerPage = (event) => {
     setRowPerPage(event.target.value);
     setPage(0);
   };
 
-  const handleLogout=()=>{
-    // localStorage.removeItem('token');
-    localStorage.clear();
-    console.log('logout');
-  }
+  const handleLogout = () => localStorage.clear();
 
   return (
     <div className="parent">
@@ -89,7 +97,9 @@ const Admin = () => {
             <button className="btn">Add Poll</button>
           </NavLink>
           <NavLink to={"/signIn"}>
-            <button onClick={handleLogout} className="btn">Log Out</button>
+            <button onClick={handleLogout} className="btn">
+              Log Out
+            </button>
           </NavLink>
         </div>
         {open && (
@@ -134,10 +144,15 @@ const Admin = () => {
                         >
                           <EditIcon />
                         </NavLink>
-                        <DeleteIcon
-                          className={"icon-btns"}
-                          onClick={() => handleDelete(dataList._id)}
-                        />
+
+                        {deletePollTitle === dataList._id ? (
+                          <CircularProgress size="2rem"/>
+                        ) : (
+                          <DeleteIcon
+                            className={"icon-btns"}
+                            onClick={() => handleDelete(dataList._id)}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="card-body">
@@ -158,16 +173,20 @@ const Admin = () => {
                                 }}
                               >
                                 <div>vote:{option.vote} </div>
-                                <DeleteIcon
-                                  className={"icon-btns"}
-                                  onClick={() =>
-                                    handleDeleteOption(
-                                      dataList._id,
-                                      option.option,
-                                      i
-                                    )
-                                  }
-                                />
+
+                                {deletePollOption === option.option ? (
+                                  <CircularProgress size="2rem"/>
+                                ) : (
+                                  <DeleteIcon
+                                    className={"icon-btns"}
+                                    onClick={() =>
+                                      handleDeleteOption(
+                                        dataList._id,
+                                        option.option
+                                      )
+                                    }
+                                  />
+                                )}
                               </div>
                             </div>
                           </div>
