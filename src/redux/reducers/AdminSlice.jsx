@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { dispatch } from '../Store';
 import axiosInstance from '../../utilities/axios';
 
 const AdminSlice = createSlice({
@@ -37,7 +36,7 @@ const AdminSlice = createSlice({
 });
 
 export function fetchedAllPolls(){
-    return async () =>{
+    return async (dispatch) =>{
         dispatch(AdminSlice.actions.startLoading());
         try{
             const response = await axiosInstance.get('list_polls');

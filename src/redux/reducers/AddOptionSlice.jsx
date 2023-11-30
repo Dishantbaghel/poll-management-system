@@ -36,7 +36,6 @@ const AddOptionSlice = createSlice({
 })
 
 export function optionsAdd(value, id) {
-  console.log(value, id);
     return async (dispatch) => {
       dispatch(AddOptionSlice.actions.startLoading());
       try {

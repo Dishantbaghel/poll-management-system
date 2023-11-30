@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { fetchedAllPolls } from "../redux/reducers/HomeSlice";
+import { fetchedAllPolls } from "../redux/reducers/AdminSlice";
 import { dispatch } from "../redux/Store";
 import { useNavigate } from "react-router-dom";
 import { vote } from "../redux/reducers/VoteSlice";
@@ -11,8 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPageOption, setRowsPerPageOption] = useState([5, 10, 15]);
-  const adminLoading = useSelector((state) => state.HomeSlice.isLoading);
-  const listItems = useSelector((state) => state.HomeSlice.data);
+  const adminLoading = useSelector((state) => state.AdminSlice.isLoading);
+  const listItems = useSelector((state) => state.AdminSlice.data);
   const navigate = useNavigate();
   const [disabledOptions, setDisabledOptions] = useState({});
 
@@ -44,7 +44,10 @@ const Home = () => {
     localStorage.setItem("rowpage", rowPerPage);
   }, [page, rowPerPage]);
 
-  const handleLogOut = () => navigate("/");
+  const handleLogOut = () => {
+    localStorage.clear();
+    navigate("/");
+  }
 
   const handleVote = (id, opt) => {
     const token = localStorage.getItem("token");

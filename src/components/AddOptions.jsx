@@ -5,17 +5,32 @@ import { dispatch } from "../redux/Store";
 import { optionsAdd } from "../redux/reducers/AddOptionSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from 'react-redux'
 
 const AddOptions = () => {
   const [inputOption, setInputOption] = useState("");
   const { optionId } = useParams();
   const navigate = useNavigate();
+  const getOptions = useSelector((state)=>state.AdminSlice)
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (inputOption.trim() !== "") {
+  
+    const isDuplicate = getOptions.data.some((poll) => poll.options.some((option) => option.option === inputOption.trim()));
+    if (inputOption.trim() !== "" && !isDuplicate) {
       dispatch(optionsAdd(inputOption, optionId));
       navigate("/Admin");
+    } else if (isDuplicate) {
+      toast.error("🦄 Duplicate option! Please enter a unique option.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } else {
       toast.error("🦄 InputField cannot be empty!", {
         position: "top-center",
@@ -29,6 +44,7 @@ const AddOptions = () => {
       });
     }
   };
+  
 
   const handleTitle = (e) => {
     setInputOption(e.target.value);

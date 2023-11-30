@@ -29,7 +29,7 @@ const SignIn = () => {
       dispatch(resetReducer());
 
       const isAdmin = decoded.role.toLowerCase() === "admin";
-      navigate(isAdmin ? "/Admin" : "/Home");
+      navigate(isAdmin ? "/private/Admin" : "/private/Home");
     }
   }, [loginSlice.isSuccess, dispatch, navigate]);
 

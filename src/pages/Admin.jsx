@@ -75,8 +75,8 @@ const Admin = () => {
   };
 
   const handleLogout=()=>{
-    localStorage.removeItem('token');
-    // localStorage.clear();
+    // localStorage.removeItem('token');
+    localStorage.clear();
     console.log('logout');
   }
 
