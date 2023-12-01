@@ -38,7 +38,6 @@ const initialState = {
   });
 
   export function signup(payload) {
-    console.log(payload);
     return async (dispatch) => {
       dispatch(signupSlice.actions.startLoading());
       try {

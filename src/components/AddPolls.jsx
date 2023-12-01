@@ -40,7 +40,7 @@ const AddPolls = () => {
 
     const optionsList = newOptions.map((option) => option.option);
     dispatch(AddPoll(title, optionsList));
-    navigate("/private/Admin");
+    navigate("/Admin");
   };
 
   const handleChange = (event, index) => {
@@ -54,7 +54,7 @@ const AddPolls = () => {
     setTitle(event.target.value.trim());
   };
 
-  const handleCancel = () => navigate("/private/Admin");
+  const handleCancel = () => navigate("/Admin");
 
   const showError = (message) => {
     toast.error(message, { position: "top-center", autoClose: 2000, theme: "colored" });

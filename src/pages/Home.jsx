@@ -48,7 +48,6 @@ const Home = () => {
     localStorage.clear();
     navigate("/");
   }
-
   const handleVote = (id, opt) => {
     const token = localStorage.getItem("token");
     const header = {
