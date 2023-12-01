@@ -26,9 +26,11 @@ const SignIn = () => {
       localStorage.setItem("token", loginSlice.data.token);
       localStorage.setItem("role", decoded.role.toLowerCase());
       dispatch(resetReducer());
-
-      const isAdmin = decoded.role.toLowerCase() === "admin";
-      navigate(isAdmin ? "/private/Admin" : "/private/Home");
+      if(decoded.role==="admin"){
+        navigate("/admin")
+      }else if(decoded.role==="guest"){
+        navigate("/home")
+      }
     }
   }, [loginSlice.isSuccess, dispatch, navigate]);
 

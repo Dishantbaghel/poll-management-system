@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { deletePoll } from "../redux/reducers/DeletePollSlice";
 import { deleteOption } from "../redux/reducers/DeleteOptionSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Backdrop, CircularProgress, TablePagination } from "@mui/material";
 import "./admin.css";
 
@@ -20,6 +20,8 @@ const Admin = () => {
     const storedPage = JSON.parse(localStorage.getItem("page"));
     return storedPage || 0;
   });
+
+  const navigate = useNavigate()
   const [rowsPerPageOption, setRowsPerPageOption] = useState([5, 10, 15]);
 
   const row = () => {
@@ -86,7 +88,10 @@ const Admin = () => {
     setPage(0);
   };
 
-  const handleLogout = () => localStorage.clear();
+  const handleLogout = () =>{
+    localStorage.clear();
+    navigate("/")
+  } 
 
   return (
     <div className="admin-parent">
@@ -96,11 +101,9 @@ const Admin = () => {
           <NavLink to={"/AddPolls"}>
             <button className="btn">Add Poll</button>
           </NavLink>
-          <NavLink to={"/signIn"}>
-            <button onClick={handleLogout} className="btn">
+            <div onClick={handleLogout} className="btn">
               Log Out
-            </button>
-          </NavLink>
+            </div>
         </div>
         {open && (
           <Backdrop
